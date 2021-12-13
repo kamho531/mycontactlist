@@ -1,0 +1,136 @@
+ScreenManager:
+    MainScreen:
+    DetailScreen:
+    EditScreen:
+    
+<MainScreen>:
+    name: 'main'
+    BoxLayout:
+        orientation: "vertical" 
+             
+        
+        ScrollView:
+            MDList:
+                id: container
+                refresh_callback: app.refresh_callback
+                root_layout: root
+                                
+                                                       
+
+        MDBottomAppBar:
+            MDToolbar:
+                icon: "playlist-plus"
+                title: "My Contact List"
+                type: 'bottom'
+                md_bg_color: app.theme_cls.primary_color
+                mode: 'free-end'
+                on_action_button: 
+                    root.manager.current = 'detail'
+                    root.manager.transition.direction = "left"
+
+        
+<DetailScreen>:
+    name: 'detail'
+    MDFloatLayout:
+       
+            
+        MDTextField:
+            id: name_txt
+            hint_text: "Enter name here"
+            mode: "rectangle"
+            pos_hint: {"x": 0.01, "y": 0.9}
+            
+        MDTextField:
+            id: phonenum_txt
+            hint_text: "Enter phone number here"
+            helper_text: "In format of XXX-XXX-XXXX"
+            helper_text_mode: "on_focus"
+            mode: "rectangle"
+            pos_hint: {"x": 0.01, "y": 0.8}
+                 
+        MDTextField:
+            id: email_txt
+            hint_text: "Enter email here"
+            helper_text: "Must have a @"
+            helper_text_mode: "on_focus"
+            mode: "rectangle"
+            pos_hint: {"x": 0.01, "y": 0.7}            
+        
+               
+        
+    MDRectangleFlatButton:
+        text: 'Add'
+        pos_hint: {'center_x':0.5,'center_y':0.4}
+        on_press: 
+            root.manager.current = 'main'
+            root.manager.transition.direction = "right"
+            app.show_data()
+
+    MDRectangleFlatButton:
+        text: 'Cancel'
+        pos_hint: {'center_x':0.5,'center_y':0.3}
+        on_press: 
+            root.manager.current = 'main'
+            root.manager.transition.direction = "right"
+
+               
+<EditScreen>:
+    name: 'edit'
+    
+    
+    MDFloatLayout:
+       
+            
+        MDTextField:
+            id: edit_name
+            hint_text: "Edit name here"
+            pos_hint: {"x": 0.01, "y": 0.9}
+            
+        MDTextField:
+            id: edit_phonenum
+            hint_text: "Edit phone number here"
+            helper_text: "In format of XXX-XXX-XXXX"
+            helper_text_mode: "on_focus"
+            pos_hint: {"x": 0.01, "y": 0.8}
+                 
+        MDTextField:
+            id: edit_email
+            hint_text: "Edit email here"
+            helper_text: "Must have a @"
+            helper_text_mode: "on_focus"
+            pos_hint: {"x": 0.01, "y": 0.7}            
+        
+        MDFlatButton:
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            on_release: app.show_alert_dialog()
+            
+                   
+        
+    MDRectangleFlatButton:
+        text: 'Save'
+        pos_hint: {'center_x':0.5,'center_y':0.4}
+        on_press: 
+            root.manager.current = 'main'
+            root.manager.transition.direction = "down"
+            app.save_data()
+
+    MDRectangleFlatButton:
+        text: 'Delete'
+        pos_hint: {'center_x':0.5,'center_y':0.3}
+        on_press: 
+            #root.manager.current = 'main'
+            #root.manager.transition.direction = "down"
+            app.show_alert_dialog()    
+
+    MDRectangleFlatButton:
+        text: 'Cancel'
+        pos_hint: {'center_x':0.5,'center_y':0.2}
+        on_press: 
+            root.manager.current = 'main'
+            root.manager.transition.direction = "down"
+            
+              
+
+
+            
+                            
